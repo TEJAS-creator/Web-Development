@@ -1,0 +1,122 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>India Time Clock</title>
+      <style>
+        /* Reset margin and padding */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background: linear-gradient(135deg, #6b9cff, #f0f4ff);
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .clock-container {
+          background: #ffffff;
+          border-radius: 20px;
+          padding: 30px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          text-align: center;
+          width: 350px;
+          animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .clock-title {
+          font-size: 28px;
+          color: #1877f2;
+          font-weight: 600;
+          margin-bottom: 15px;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+        }
+
+        .clock-time {
+          font-size: 60px;
+          color: #333333;
+          font-weight: bold;
+          letter-spacing: 2px;
+        }
+
+        .clock-date {
+          font-size: 20px;
+          color: #555555;
+          margin-top: 15px;
+          opacity: 0.8;
+        }
+
+        .clock-time,
+        .clock-date {
+          transition: color 0.3s ease-in-out;
+        }
+
+        .clock-time:hover {
+          color: #1877f2;
+        }
+
+        .clock-date:hover {
+          color: #333333;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="clock-container">
+        <div class="clock-title">India Time (IST)</div>
+        <div class="clock-time" id="clockTime">00:00:00 AM</div>
+        <div class="clock-date" id="clockDate">Loading date...</div>
+      </div>
+
+      <script>
+        function updateClock() {
+          const now = new Date();
+          const options = {
+            timeZone: "Asia/Kolkata",
+            hour12: true,
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+          };
+          const timeString = now.toLocaleTimeString("en-US", options);
+          const dateString = now.toLocaleDateString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          });
+
+          document.getElementById("clockTime").textContent = timeString;
+          document.getElementById("clockDate").textContent = dateString;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+      </script>
+    </body>
+  </html>
