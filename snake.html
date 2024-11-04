@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snake Game</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffff00;
+        font-family: Arial, sans-serif;
+    }
+    canvas {
+        border: 1px solid #000000;
+        background-color: #19fd00;
+    }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas" width="600" height="500"></canvas>
+<script>
+    // Game variables
+    let canvas, ctx;
+    let snake, fruit;
+    let tileSize = 20;
+    let score = 0;
+    
+    // Game initialization
+    function init() {
+        canvas = document.getElementById('gameCanvas');
+        ctx = canvas.getContext('2d');
+        snake = new Snake();
+        fruit = new Fruit();
+        fruit.pickLocation();
+        
+        // Game loop
+        setInterval(gameLoop, 100);
+    }
+    
+    // Snake object
+    function Snake() {
+        this.x = 0;
+        this.y = 0;
+        this.xSpeed = tileSize * 1;
+        this.ySpeed = 0;
+        this.tail = [];
+        
+        this.draw = function() {
+            ctx.fillStyle = '#4caf50';
+            for (let i = 0; i < this.tail.length; i++) {
+                ctx.fillRect(this.tail[i].x, this.tail[i].y, tileSize, tileSize);
+            }
+            ctx.fillRect(this.x, this.y, tileSize, tileSize);
+        };
+        
+        this.update = function() {
+            // Check if the snake collides with itself
+            for (let i = 0; i < this.tail.length; i++) {
+                if (this.x === this.tail[i].x && this.y === this.tail[i].y) {
+                    gameOver();
+                    return;
+                }
+            }
+            
+            // Move the tail
+            for (let i = 0; i < this.tail.length - 1; i++) {
+                this.tail[i] = this.tail[i + 1];
+            }
+            this.tail[score - 1] = { x: this.x, y: this.y };
+            
+            // Move the snake's head
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+            
+            // Wrap around the canvas if out of bounds
+            if (this.x >= canvas.width) {
+                this.x = 0;
+            }
+            if (this.y >= canvas.height) {
+                this.y = 0;
+            }
+            if (this.x < 0) {
+                this.x = canvas.width - tileSize;
+            }
+            if (this.y < 0) {
+                this.y = canvas.height - tileSize;
+            }
+            
+            this.draw();
+        };
+        
+        this.changeDirection = function(direction) {
+            switch (direction) {
+                case 'ArrowUp':
+                    this.xSpeed = 0;
+                    this.ySpeed = -tileSize * 1;
+                    break;
+                case 'ArrowDown':
+                    this.xSpeed = 0;
+                    this.ySpeed = tileSize * 1;
+                    break;
+                case 'ArrowLeft':
+                    this.xSpeed = -tileSize * 1;
+                    this.ySpeed = 0;
+                    break;
+                case 'ArrowRight':
+                    this.xSpeed = tileSize * 1;
+                    this.ySpeed = 0;
+                    break;
+            }
+        };
+        
+        this.eat = function(fruit) {
+            if (this.x === fruit.x && this.y === fruit.y) {
+                score++;
+                fruit.pickLocation();
+            }
+        };
+    }
+    
+    // Fruit object
+    function Fruit() {
+        this.x;
+        this.y;
+        
+        this.pickLocation = function() {
+            this.x = Math.floor(Math.random() * (canvas.width / tileSize)) * tileSize;
+            this.y = Math.floor(Math.random() * (canvas.height / tileSize)) * tileSize;
+        };
+        
+        this.draw = function() {
+            ctx.fillStyle = '#f44336';
+            ctx.fillRect(this.x, this.y, tileSize, tileSize);
+        };
+    }
+    
+    // Game loop function
+    function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        snake.update();
+        snake.eat(fruit);
+        fruit.draw();
+        ctx.fillStyle = '#000';
+        ctx.fillText('Score: ' + score, 10, 20);
+    }
+    
+    // Keyboard input handling
+    document.addEventListener('keydown', function(event) {
+        const direction = event.key;
+        snake.changeDirection(direction);
+    });
+    
+    // Game over function
+    function gameOver() {
+        const playAgain = confirm('Game Over! Your score is: ' + score + '\nDo you want to play again?');
+        if (playAgain) {
+            snake = new Snake(); // Reset the snake
+            fruit = new Fruit(); // Reset the fruit
+            score = 0; // Reset the score
+            fruit.pickLocation(); // Place new fruit
+        } else {
+            alert('Thank you for playing!');
+            // Optionally, redirect or do something else after game over
+        }
+    }
+    
+    // Initialize the game
+    init();
+</script>
+</body>
+</html>
