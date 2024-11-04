@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
+
+      input[type="text"] {
+        width: calc(100% - 100px);
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      button.edit,
+      button.delete {
+        margin-left: 10px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      button.edit {
+        background-color: #007bff;
+        color: white;
+      }
+
+      button.delete {
+        background-color: #dc3545;
+        color: white;
+      }
+
+      button.edit:hover {
+        background-color: #0056b3;
+      }
+
+      button.delete:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <input type="text" id="taskInput" placeholder="Enter a new task" />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", loadTasks);
+
+      function loadTasks() {
+        const taskList = document.getElementById("taskList");
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        tasks.forEach((task) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+                    ${task}
+                    <button class="edit" onclick="editTask(this)">Edit</button>
+                    <button class="delete" onclick="deleteTask(this)">Delete</button>
+                `;
+          taskList.appendChild(li);
+        });
+      }
+
+      function saveTasks() {
+        const taskList = document.getElementById("taskList");
+        const tasks = Array.from(taskList.children).map((li) =>
+          li.firstChild.textContent.trim()
+        );
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+
+        if (taskInput.value.trim() === "") {
+          alert("Please enter a task.");
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+                ${taskInput.value}
+                <button class="edit" onclick="editTask(this)">Edit</button>
+                <button class="delete" onclick="deleteTask(this)">Delete</button>
+            `;
+        taskList.appendChild(li);
+        taskInput.value = "";
+
+        saveTasks();
+      }
+
+      function editTask(button) {
+        const li = button.parentElement;
+        const newTask = prompt(
+          "Edit your task:",
+          li.firstChild.textContent.trim()
+        );
+
+        if (newTask !== null && newTask.trim() !== "") {
+          li.firstChild.textContent = newTask;
+          saveTasks();
+        }
+      }
+
+      function deleteTask(button) {
+        const li = button.parentElement;
+        li.remove();
+        saveTasks();
+      }
+    </script>
+  </body>
+</html>
