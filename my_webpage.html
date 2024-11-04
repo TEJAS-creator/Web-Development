@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tejas' Personal Webpage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #272c32;
+        scroll-behavior: smooth;
+      }
+      header {
+        background: #0871db;
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+      }
+      header h1 {
+        font-size: 3em;
+        margin: 0;
+        font-weight: 600;
+      }
+      header p {
+        font-size: 1.2em;
+        margin: 10px 0 0;
+      }
+      nav {
+        background: #067cf3;
+        padding: 15px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #ffc107;
+      }
+      section {
+        padding: 60px 20px;
+        margin: 20px auto;
+        max-width: 900px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+      section h2 {
+        margin-top: 0;
+        font-size: 2em;
+        font-weight: 600;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #027ef9;
+        color: white;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+      .project-item {
+        cursor: pointer;
+        color: #007bff;
+      }
+      .project-item:hover {
+        text-decoration: underline;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background: rgba(0, 0, 0, 0.6);
+        padding-top: 60px;
+      }
+      .modal-content {
+        background: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #1809e3;
+        width: 80%;
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .skills-bar {
+        width: 100%;
+        background: #e9ecef;
+        border-radius: 25px;
+        margin: 10px 0;
+        overflow: hidden;
+      }
+      .skills-bar div {
+        height: 24px;
+        background: #007bff;
+        text-align: center;
+        color: white;
+        line-height: 24px;
+      }
+      .social-icons img {
+        width: 30px;
+        height: 30px;
+        margin: 0 10px;
+        transition: transform 0.3s;
+      }
+      .social-icons img:hover {
+        transform: scale(1.1);
+      }
+      .scroll-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        display: none;
+        transition: background 0.3s;
+      }
+      .scroll-top.visible {
+        display: flex;
+      }
+      .scroll-top:hover {
+        background: #0056b3;
+      }
+      form input,
+      form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-family: "Poppins", sans-serif;
+      }
+      form input[type="submit"] {
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      form input[type="submit"]:hover {
+        background: #0056b3;
+      }
+      .faq {
+        margin: 20px auto;
+        max-width: 900px;
+      }
+      .faq-question {
+        cursor: pointer;
+        font-weight: 500;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background: #f1f1f1;
+      }
+      .faq-answer {
+        display: none;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        background: #ffffff;
+      }
+      .testimonial-carousel {
+        margin: 20px auto;
+      }
+      .testimonial-carousel blockquote {
+        padding: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background: #f8f9fa;
+        margin: 0;
+      }
+      .resume-tabs button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      .resume-tabs button:hover {
+        background: #0056b3;
+      }
+      .resume-content {
+        padding: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background: #ffffff;
+      }
+      .filter-button-group button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+      .filter-button-group button:hover {
+        background: #0056b3;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .element-item {
+        width: 100%;
+        max-width: calc(33% - 10px);
+      }
+      @media (max-width: 768px) {
+        .element-item {
+          max-width: calc(50% - 10px);
+        }
+      }
+      @media (max-width: 480px) {
+        .element-item {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Web Page</h1>
+      <p>B.Tech in Computer Science and Engineering, MIT Bangalore</p>
+    </header>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#blog">Blog</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Hi, I'm Tejas, a computer science student at MIT Bangalore. I'm
+        passionate about web development and machine learning.
+      </p>
+    </section>
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-bar"><div style="width: 80%">Python</div></div>
+      <div class="skills-bar"><div style="width: 70%">C</div></div>
+      <div class="skills-bar"><div style="width: 60%">HTML</div></div>
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li class="project-item" data-project="project1">Project 1</li>
+        <li class="project-item" data-project="project2">Project 2</li>
+        <li class="project-item" data-project="project3">Project 3</li>
+      </ul>
+    </section>
+    <section id="blog">
+      <h2>Blog</h2>
+      <article>
+        <h3>
+          <a
+            href="https://animejapantejas.blogspot.com/2024/07/jarvis.html"
+            target="_blank"
+            >Jarvis</a
+          >
+        </h3>
+      </article>
+      <article>
+        <h3>
+          <a
+            href="https://animejapantejas.blogspot.com/2024/07/youtube-automate.html"
+            target="_blank"
+            >Youtube</a
+          >
+        </h3>
+      </article>
+      <article>
+        <h3>
+          <a
+            href="https://animejapantejas.blogspot.com/2024/07/pyauto-gui-automation.html"
+            target="_blank"
+            >Pyautogui</a
+          >
+        </h3>
+      </article>
+      <article>
+        <h3>
+          <a
+            href="https://animejapantejas.blogspot.com/2024/07/gemini.html"
+            target="_blank"
+            >Gemini</a
+          >
+        </h3>
+      </article>
+      <article>
+        <h3>
+          <a
+            href="https://animejapantejas.blogspot.com/2024/07/selenium.html"
+            target="_blank"
+            >Selenium</a
+          >
+        </h3>
+      </article>
+    </section>
+    <section id="testimonials">
+      <h2>Testimonials</h2>
+      <div class="testimonial-carousel">
+        <blockquote>
+          <p>"Learning is experience. Everything else is just information."</p>
+          <footer>- Albert Einstein</footer>
+        </blockquote>
+        <blockquote>
+          <p>
+            "Do the best you can until you know better. Then when you know
+            better, do better."
+          </p>
+          <footer>- Maya Angelou</footer>
+        </blockquote>
+      </div>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <form id="contact-form">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" rows="4" required></textarea
+        ><br />
+        <input type="submit" value="Send" />
+      </form>
+    </section>
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <div class="faq-question">
+          What is your primary focus in computer science?
+        </div>
+        <div class="faq-answer">
+          My primary focus is on web development and machine learning.
+        </div>
+        <div class="faq-question">
+          What technologies do you enjoy working with?
+        </div>
+        <div class="faq-answer">
+          I enjoy working with JavaScript, Python, and Django.
+        </div>
+        <div class="faq-question">What are your career goals?</div>
+        <div class="faq-answer">
+          I aim to work as a software developer specializing in web technologies
+          and machine learning.
+        </div>
+      </div>
+    </section>
+    <footer>
+      <p>&copy; 2024 Tejas</p>
+    </footer>
+    <div id="project1" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('project1')">&times;</span>
+        <h2>Project 1</h2>
+        <p>
+          The Jarvis project is a Python-based virtual assistant that can handle
+          various tasks and provide information based on user commands. It often
+          includes features like voice recognition, natural language processing,
+          and integration with various APIs and services.
+        </p>
+      </div>
+    </div>
+    <div id="project2" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('project2')">&times;</span>
+        <h2>Project 2</h2>
+        <p>
+          The Gemini Voicebot project in Python typically refers to an advanced
+          voice assistant or chatbot that utilizes natural language processing
+          (NLP) and machine learning techniques to interact with users through
+          voice commands.
+        </p>
+      </div>
+    </div>
+    <div id="project3" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('project3')">&times;</span>
+        <h2>Project 3</h2>
+        <p>
+          An OpenCV Python project uses the OpenCV library to process images and
+          videos, perform computer vision tasks, and apply machine learning
+          techniques. It may involve tasks such as image manipulation, object
+          detection, image segmentation, and feature extraction.
+        </p>
+      </div>
+    </div>
+    <button id="scrollTopBtn" class="scroll-top">&uarr;</button>
+
+    <!-- Tawk.to Live Chat Script -->
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {};
+      var Tawk_LOAD_STYLE = "minimal";
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/YOUR_TAWKTO_PROPERTY_ID/default";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+      })();
+
+      document.querySelectorAll(".project-item").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          const project = event.target.getAttribute("data-project");
+          document.getElementById(project).style.display = "block";
+        });
+      });
+
+      function closeModal(project) {
+        document.getElementById(project).style.display = "none";
+      }
+
+      window.addEventListener("scroll", () => {
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add("visible");
+        } else {
+          scrollTopBtn.classList.remove("visible");
+        }
+      });
+
+      document.getElementById("scrollTopBtn").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const serviceID = "service_m9aatwr"; // Replace with your EmailJS service ID
+          const templateID = "template_x96tzaa"; // Replace with your EmailJS template ID
+
+          emailjs.sendForm(serviceID, templateID, this).then(
+            (response) => {
+              alert("Message sent successfully!");
+              document.getElementById("contact-form").reset();
+            },
+            (error) => {
+              alert("Failed to send the message. Please try again.");
+            }
+          );
+        });
+
+      document.querySelectorAll(".faq-question").forEach((item) => {
+        item.addEventListener("click", () => {
+          const answer = item.nextElementSibling;
+          answer.style.display =
+            answer.style.display === "block" ? "none" : "block";
+        });
+      });
+
+      $(".testimonial-carousel").slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      });
+
+      const filterButtonGroup = document.querySelector(".filter-button-group");
+      const grid = document.querySelector(".grid");
+
+      if (filterButtonGroup && grid) {
+        const iso = new Isotope(grid, {
+          itemSelector: ".element-item",
+          layoutMode: "fitRows",
+        });
+
+        filterButtonGroup.addEventListener("click", (event) => {
+          if (!event.target.matches("button")) return;
+          const filterValue = event.target.getAttribute("data-filter");
+          iso.arrange({ filter: filterValue });
+        });
+      }
+    </script>
+  </body>
+</html>
