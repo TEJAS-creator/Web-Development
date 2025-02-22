@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Centered Grayscale Image</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      .grayscale-effect {
+        width: 10cm;
+        height: 10cm;
+        object-fit: cover;
+        border-radius: 20px; /* Rounded square effect */
+        transition: filter 0.5s ease-in-out;
+      }
+
+      .grayscale-effect:hover {
+        filter: grayscale(100%);
+      }
+    </style>
+  </head>
+  <body>
+    <img src="image.jpg" alt="Sample Image" class="grayscale-effect" />
+  </body>
+</html>
