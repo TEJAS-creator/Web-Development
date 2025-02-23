@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- comment -->
+    <title>My HTML</title>
+  </head>
+  <body style="background-color: rgb(63, 197, 255)">
+    <h1>WEBSITE</h1>
+    My name is Tejas
+    <h1>Tejas</h1>
+    <h2>Tejas</h2>
+    <h3>Tejas</h3>
+    <h4>Tejas</h4>
+    <h5>Tejas</h5>
+    <h6>Tejas</h6>
+    <p>
+      Hi my name is Tejas. <br />
+      I live in Bangalore.
+    </p>
+
+    <!-- Hyperlinks -->
+    <a href="https://www.google.com" target="_blank">Google</a><br />
+    <a href="newpage.html" target="_blank">Go to next page</a><br />
+    <a href="mailto:tejasnj14@gmail.com" target="_blank">Send Mail</a><br />
+    <!-- to go to next page-->
+    <!-- instead of _blank if we put _self it will open in the same tab -->
+
+    <!-- to insert images -->
+    <img src="luffy.jpg" height="300" title="Monkey D Luffy" /><br />
+
+    <!-- To add audio file -->
+    <audio controls src="Alan Walker - Spectre [NCS Release].mp3">
+      <!-- <audio controls autoplay src="Alan Walker - Spectre [NCS Release].mp3">  to autoplay add |muted| to mute-->
+      <!-- add |loop| to loop the video -->
+      <!-- <source src="Alan Walker - Spectre [NCS Release].mp3" /> --></audio
+    ><br />
+
+    <!-- to add video files -->
+    <video controls height="300">
+      <source src="naruto.mp4" />
+      <source src="naruto.WebM" />
+      <!--backup incase mp4 does not work-->
+    </video>
+
+    <!-- Formatting -->
+    <p>This is a <b>normal</b> text for Formatting</p>
+    <p>This is a <i>normal</i> text for Formatting</p>
+    <p>This is a <sub>normal</sub> text for Formatting</p>
+    <p>This is a <sup>normal</sup> text for Formatting</p>
+    <p>This is a <big>normal</big> text for Formatting</p>
+    <p>This is a <ins>text is inserted</ins> text for Formatting</p>
+    <p>This is a <del>text is deleted</del> text for Formatting</p>
+    <p>This is a <mark>normal</mark> text for Formatting</p>
+    <p>This is a <small>normal</small> text for Formatting</p>
+
+    <!-- lists in html -->
+    <h2>Ordered List of Cars</h2>
+    <ol>
+      <li>Tesla Model S</li>
+      <li>BMW M3</li>
+      <li>Audi R8</li>
+      <li>Mercedes-Benz</li>
+      <li>Ford Mustang</li>
+    </ol>
+
+    <h2>Unordered List of Cars</h2>
+    <ul>
+      <li>Tesla Model S</li>
+      <li>BMW M3</li>
+      <li>Audi R8</li>
+      <li>Mercedes-Benz</li>
+      <li>Ford Mustang</li>
+    </ul>
+
+    <h2>Descriptive List of Cars</h2>
+    <dl>
+      <dt>Tesla Model S</dt>
+      <dd>An electric luxury sedan known for its speed and range.</dd>
+
+      <dt>BMW M3</dt>
+      <dd>A high-performance sports sedan with excellent handling.</dd>
+
+      <dt>Audi R8</dt>
+      <dd>A sleek supercar with a powerful V10 engine.</dd>
+
+      <dt>Mercedes-Benz</dt>
+      <dd>A rugged yet luxurious SUV with off-road capabilities.</dd>
+
+      <dt>Ford Mustang</dt>
+      <dd>An iconic American muscle car with a roaring V8 engine.</dd>
+    </dl>
+
+    <!-- Create tables in html -->
+    <h3>College Timings</h3>
+    <table bgcolor="black">
+      <tr bgcolor="pink">
+        <th width="100">Sunday</th>
+        <th width="100">Monday</th>
+        <th width="100">Tuesday</th>
+        <th width="100">Wednesday</th>
+        <th width="100">Thursday</th>
+        <th width="100">Friday</th>
+        <th width="100">Saturday</th>
+      </tr>
+      <tr bgcolor="yellow" align="center">
+        <td>Holiday</td>
+        <td>Open</td>
+        <td>Open</td>
+        <td>Open</td>
+        <td>Open</td>
+        <td>Open</td>
+        <td>Holiday</td>
+      </tr>
+    </table>
+
+    <!-- To add background colors -->
+    <!-- <body style="background-color: aquamarine"></body> -->
+    <p style="background-color: red">
+      Monkey D. Luffy is the main protagonist of One Piece, created by Eiichiro
+      Oda. He is the captain of the Straw Hat Pirates and dreams of becoming the
+      Pirate King. Luffy possesses the Gum-Gum Fruit, which gives his body
+      rubber-like abilities.
+      <!-- span tag is used to change attributes within it  -->
+      <span style="background-color: rgb(98, 0, 255)"
+        >He is known for his carefree nature, strong will, and deep loyalty to
+        his friends. Over time, he masters powerful techniques like Gear Second,
+        Gear Fourth, and Gear Fifth.</span
+      >
+    </p>
+
+    <!-- Buttons in html -->
+    <a href="https://www.youtube.com" target="_blank">
+      <button style="background-color: rgb(0, 0, 0); color: white">
+        Youtube
+      </button>
+    </a>
+
+    <!-- Forms in html -->
+    <form>
+      <!-- Name -->
+      <div>
+        <label>Name:</label>
+        <input type="text" />
+      </div>
+      <br />
+      <!-- ID -->
+      <div>
+        <label>ID: </label>
+        <input type="number" />
+      </div>
+      <br />
+      <!-- Password -->
+      <div>
+        <label>Password: </label>
+        <input type="password" />
+      </div>
+      <!-- Email -->
+      <br />
+      <div>
+        <label>Email: </label>
+        <input type="email" />
+      </div>
+      <!-- Birthdate -->
+      <br />
+      <div>
+        <label>DOB: </label>
+        <input type="date" />
+      </div>
+      <!-- Gender -->
+      <br />
+      <div>
+        <label>Male</label>
+        <input type="radio" />
+
+        <label>Female</label>
+        <input type="radio" />
+      </div>
+      <!-- payment -->
+      <br />
+      <div>
+        <label>Payment:</label>
+        <select>
+          <option value="visa">visa</option>
+          <option value="cash">cash</option>
+          <option value="crypto">crypto</option>
+        </select>
+      </div>
+      <!-- Reset -->
+      <br />
+      <div>
+        <input type="Reset" />
+      </div>
+      <br />
+      <!-- Submit  -->
+      <div>
+        <input type="Submit" />
+      </div>
+    </form>
+  </body>
+</html>
